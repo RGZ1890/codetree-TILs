@@ -12,6 +12,7 @@ def HappyList(row, n, m):
     return 0
 
 answer = 0
+if (n == 1) answer = 1
 for i in range(n):
     board[i] = list(map(int, sys.stdin.readline().split()))
     answer += HappyList(board[i], n, m)
