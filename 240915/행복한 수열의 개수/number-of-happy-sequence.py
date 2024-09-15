@@ -21,7 +21,7 @@ if (n == 1):
 else:
     for j in range(n):
         row = [board[i][j] for i in range(n)]
-        answer += HappyList(board[i], n, m)
+        answer += HappyList(board[j], n, m)
         answer += HappyList(row, n, m)
 
 print(answer)
