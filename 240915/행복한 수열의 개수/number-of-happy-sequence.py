@@ -11,17 +11,14 @@ def HappyList(row, n, m):
             return 1
     return 0
 
-
+answer = 0
 for i in range(n):
     board[i] = list(map(int, sys.stdin.readline().split()))
+    answer += HappyList(board[i], n, m)
+for j in range(n):
+    row = [board[i][j] for i in range(n)]
+    answer += HappyList(row, n, m)
 
-answer = 0
 if (n == 1):
     answer = 2
-else:
-    for j in range(n):
-        row = [board[i][j] for i in range(n)]
-        answer += HappyList(board[j], n, m)
-        answer += HappyList(row, n, m)
-
 print(answer)
