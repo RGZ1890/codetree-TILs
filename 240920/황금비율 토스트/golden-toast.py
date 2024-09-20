@@ -89,7 +89,7 @@ def main():
             it = it.next
         elif (com == 'D'):
             l.erase(it.prev)
-            it = it.prev
+            # it = it.prev
         elif (com == 'P'):
             l.insert(it, args[1])
             it = it.next
