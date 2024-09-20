@@ -85,9 +85,11 @@ def main():
         com = args[0]
 #       print(com, end = ' ')
         if (com == 'L'):
-            it = it.prev
+            if (it != l.begin()):
+                it = it.prev
         elif (com == 'R'):
-            it = it.next
+            if (it != l.end()):
+                it = it.next
         elif (com == 'D'):
             l.erase(it)
         elif (com == 'P'):
