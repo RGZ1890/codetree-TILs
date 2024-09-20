@@ -3,98 +3,78 @@ class Node:
         self.data = data
         self.prev = None
         self.next = None
-    
-class DLList:
+        
+class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-        self.nodeCount = 0
+        self.node_count = 0
+        
+    def is_empty(self):
+        return self.node_count == 0
     
-    def FirstNode(self, Node):
-        self.head = Node
-        self.tail = Node
-        self.prev = None
-        self.next = None
-        self.nodeCount = 1
-        
-    def clear(self):
-        self.head = None
-        self.tail = None
-        self.nodeCount = 0
-        
     def size(self):
-        return self.nodeCount
-    
-    def empty(self):
-        return 1 if self.nodeCount == 0 else 0
+        return self.node_count
     
     def front(self):
-        return None if self.empty() else self.head.data
-        
+        return self.head.data if self.head else None
+    
     def back(self):
-        return None if self.empty() else self.tail.data
+        return self.tail.data if self.tail else None
+    
+    def push_front(self, data):
+        new_node = Node(data)
+        if self.is_empty():
+            self.head = self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        self.node_count += 1
         
-    def push_front(self, num):
-        newNode = Node(num)
-        newNode.next = self.head
-
-        if (self.empty()):
-            self.FirstNode(newNode)
+    def push_back(self, data):
+        new_node = Node(data)
+        if self.is_empty():
+            self.head = self.tail = new_node
         else:
-            self.head.prev = newNode
-            self.head = newNode
-            newNode.prev = None
-            self.nodeCount += 1
-    
-    def push_back(self, num):
-        newNode = Node(num)
-        newNode.prev = self.tail
-
-        if (self.empty()):
-            self.FirstNode(newNode)
-        else:
-            self.tail.next = newNode
-            self.tail = newNode
-            newNode.next = None
-            self.nodeCount += 1
-    
+            new_node.prev = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
+        self.node_count += 1
+        
     def pop_front(self):
-        if (self.empty()):
-            print("List Empty.")
-        elif (self.size() == 1):
-            data = self.front()
-            self.clear()
-            return data
+        if self.is_empty():
+            raise IndexError("List is empty")
+        data = self.head.data
+        self.head = self.head.next
+        if self.head:
+            self.head.prev = None
         else:
-            temp = self.head
-            temp.next.prev = None
-            self.head = temp.next
-            temp.next = None
-
-            self.nodeCount -= 1
-            return temp.data
-
+            self.tail = None
+        self.node_count -= 1
+        return data
+    
     def pop_back(self):
-        if (self.empty()):
-            print("List Empty.")
-        elif (self.size() == 1):
-            data = self.front()
-            self.clear()
-            return data
+        if self.is_empty():
+            raise IndexError("List is empty")
+        data = self.tail.data
+        self.tail = self.tail.prev
+        if self.tail:
+            self.tail.next = None
         else:
-            temp = self.tail
-            temp.prev.next = None
-            self.tail = temp.prev
-            temp.prev = None
-
-            self.nodeCount -= 1
-            return temp.data
+            self.head = None
+        self.node_count -= 1
+        return data
+    
+    def clear(self):
+        self.head = self.tail = None
+        self.node_count = 0
 
 import sys
 
 def main():
     N = int(sys.stdin.readline())
-    dll = DLList()
+    dll = DoublyLinkedList()
     for i in range(N):
         cmd = sys.stdin.readline().split()
         if (cmd[0] == "push_back"):
@@ -108,7 +88,7 @@ def main():
         elif (cmd[0] == "size"):
             print(dll.size())
         elif (cmd[0] == "empty"):
-            print(dll.empty())
+            print(1 if dll.is_empty() else 0)
         elif (cmd[0] == "front"):
             print(dll.front())
         elif (cmd[0] == "back"):
