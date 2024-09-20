@@ -91,7 +91,8 @@ def main():
             if (it != l.end()):
                 it = it.next
         elif (com == 'D'):
-            l.erase(it)
+            if (it != l.end()):
+                l.erase(it)
         elif (com == 'P'):
             l.insert(it, args[1])
 #       print("it:", it.data)
