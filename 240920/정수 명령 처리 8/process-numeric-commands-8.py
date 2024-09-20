@@ -10,50 +10,61 @@ class DLList:
         self.tail = None
         self.nodeCount = 0
     
+    def FirstNode(self, Node):
+        self.head = Node
+        self.tail = Node
+        self.prev = None
+        self.next = None
+        self.nodeCount = 1
+        
+    def clear(self):
+        self.head = None
+        self.tail = None
+        self.nodeCount = 0
+        
+    def size(self):
+        return self.nodeCount
+    
+    def empty(self):
+        return 1 if self.nodeCount == 0 else 0
+    
+    def front(self):
+        return None if self.empty() else self.head.data
+        
+    def back(self):
+        return None if self.empty() else self.tail.data
+        
     def push_front(self, num):
         newNode = Node(num)
         newNode.next = self.head
 
-        if (self.head != None):
+        if (self.empty()):
+            self.FirstNode(newNode)
+        else:
             self.head.prev = newNode
             self.head = newNode
             newNode.prev = None
-        
-        else:
-            self.head = newNode
-            self.tail = newNode
-            newNode.prev = None
-
-        self.nodeCount += 1
+            self.nodeCount += 1
     
     def push_back(self, num):
         newNode = Node(num)
         newNode.prev = self.tail
 
-        if (self.tail != None):
+        if (self.empty()):
+            self.FirstNode(newNode)
+        else:
             self.tail.next = newNode
             self.tail = newNode
             newNode.next = None
-        
-        else:
-            self.head = newNode
-            self.tail = newNode
-            newNode.next = None
-        
-        self.nodeCount += 1
+            self.nodeCount += 1
     
     def pop_front(self):
-        if (self.head == None):
+        if (self.empty()):
             print("List Empty.")
-        
-        elif (self.head.next == None):
-            temp = self.head
-
-            self.head = None
-            self.tail = None
-            self.nodeCount = 0
-            return temp.data
-        
+        elif (self.size() == 1):
+            data = self.front()
+            self.clear()
+            return data
         else:
             temp = self.head
             temp.next.prev = None
@@ -64,17 +75,12 @@ class DLList:
             return temp.data
 
     def pop_back(self):
-        if (self.tail == None):
+        if (self.empty()):
             print("List Empty.")
-        
-        elif (self.tail.prev == None):
-            temp = self.tail
-
-            self.head = None
-            self.tail = None
-            self.nodeCount = 0
-            return temp.data
-        
+        elif (self.size() == 1):
+            data = self.front()
+            self.clear()
+            return data
         else:
             temp = self.tail
             temp.prev.next = None
@@ -83,24 +89,6 @@ class DLList:
 
             self.nodeCount -= 1
             return temp.data
-        
-    def size(self):
-        return self.nodeCount
-    
-    def empty(self):
-        return 1 if self.nodeCount == 0 else 0
-    
-    def front(self):
-        if (self.head == None):
-            print("List Empty.")
-        else:
-            return self.head.data
-
-    def back(self):
-        if (self.tail == None):
-            print("List Empty.")
-        else:
-            return self.tail.data
 
 import sys
 
