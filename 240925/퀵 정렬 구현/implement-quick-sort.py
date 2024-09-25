@@ -36,8 +36,7 @@ def main():
 	arr = list(map(int, sys.stdin.readline().split()))
 	
 	quick_sort(arr, 0, n - 1)
-	for num in arr:
-		print(num, end = ' ')
+	print(*arr)
 
 if __name__ == "__main__":
 	main()
