@@ -2,7 +2,8 @@
 
 import sys
 
-def parenthese(par, stack):
+def parenthese(par):
+    stack = []
     for letter in par:
         if letter == '(':
             stack.append(letter)
@@ -15,8 +16,7 @@ def parenthese(par, stack):
 
 def main():
     par = sys.stdin.readline().rstrip()
-    stack = []
-    res = parenthese(par, stack)
+    res = parenthese(par)
     print("Yes" if res else "No")
     
 
