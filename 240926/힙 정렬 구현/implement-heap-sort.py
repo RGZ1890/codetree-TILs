@@ -4,10 +4,11 @@ def heapify(arr_heap, n, idx):
 	lc, rc = idx * 2, idx * 2 + 1
 	largest = idx
 	
-	if n >= lc:
-		largest = lc if arr_heap[largest] < arr_heap[lc] else largest
-		if n >= rc:
-			largest = rc if arr_heap[largest] < arr_heap[rc] else largest
+	if n >= lc and arr_heap[largest] < arr_heap[lc]:
+		largest = lc
+	if n >= rc and arr_heap[largest] < arr_heap[rc]:
+		largest = rc
+
 	if largest != idx:
 		arr_heap[largest], arr_heap[idx] = arr_heap[idx], arr_heap[largest]
 		heapify(arr_heap, n, largest)
