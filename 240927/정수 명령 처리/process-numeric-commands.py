@@ -1,6 +1,6 @@
 import sys
 
-max_size = 100
+max_size = 10000
 
 class Stack:
 	
