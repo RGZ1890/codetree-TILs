@@ -37,7 +37,7 @@ def main():
 		args = sys.stdin.readline().split()
 		cmd = args[0]
 		if cmd == "push":
-			stack.push(args[1])
+			stack.push(int(args[1]))
 		elif cmd == "pop":
 			print(stack.pop())
 		elif cmd == "size":
