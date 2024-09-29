@@ -7,7 +7,7 @@ def main():
     for i in range(N):
         dq.append(i + 1)
     
-    while len(dq) > 1:
+    for _ in range(N - 1):
         dq.popleft()
         dq.append(dq.popleft())
     
