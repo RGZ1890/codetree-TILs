@@ -9,6 +9,7 @@ def BFS(board, visited, i, j, is_clear):
     q = []
     cnt = 0
     pos = set()
+
     q.append((i, j))
     pos.add((i, j))
     visited[i][j] = 1
@@ -55,7 +56,7 @@ for _ in range(K):
             for i in range(3):
                 new_board = [x[:] for x in board]
                 for _ in range(deg):
-                    new_board = rotate(new_board, j, i)
+                    new_board = rotate(new_board, i, j)
 
                 tmp = count_clear(new_board, False)
                 if max_cnt < tmp:
@@ -73,7 +74,7 @@ for _ in range(K):
         cnt += tmp
         for j in range(5):
             for i in range(4, -1, -1):
-                if board[i][j] == 0:
+                if board[i][j] == 0 and wall:
                     board[i][j] = wall.pop(0)
     ans.append(cnt)
 
