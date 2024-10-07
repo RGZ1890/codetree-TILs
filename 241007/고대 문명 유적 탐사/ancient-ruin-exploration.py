@@ -48,7 +48,7 @@ wall = list(map(int, input().split()))
 ans = []
 
 for _ in range(K):
-    cnt = 0
+    max_cnt = 0
     max_board = [x[:] for x in board]
     for deg in range(1, 4):
         for j in range(3):
@@ -58,10 +58,10 @@ for _ in range(K):
                     new_board = rotate(new_board, j, i)
 
                 tmp = count_clear(new_board, False)
-                if cnt < tmp:
-                    cnt = tmp
+                if max_cnt < tmp:
+                    max_cnt = tmp
                     max_board = new_board
-    if cnt == 0:
+    if max_cnt == 0:
         break
 
     cnt = 0
