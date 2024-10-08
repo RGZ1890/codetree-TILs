@@ -44,8 +44,8 @@ def update_hp(i, colliding, board, knights_pos, hp_after):
                 for k in range(knights_pos[c][1], knights_pos[c][3]):
                     if board[j][k] == 1:
                         hp_after[c] -= 1
-            if hp_after[c] < 0:
-                knights_pos[c] = [-5] * 4
+        if hp_after[c] == 0:
+            knights_pos[c] = [-1, -1, -1, -1]
 
 
 directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
