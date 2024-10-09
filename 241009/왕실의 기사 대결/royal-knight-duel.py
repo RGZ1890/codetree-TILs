@@ -6,18 +6,18 @@ def calc_move(pos, dir):
     return new_pos
 
 
-def find_collide(knights_pos, next_pos, colliding, dir):
+def find_collide(knights_pos, next_pos, hp_after, colliding, dir):
     coords = []
     for i in range(next_pos[0], next_pos[2]):
         for j in range(next_pos[1], next_pos[3]):
             coords.append([i, j])
     for k in range(1, N + 1):
-        if k not in colliding:
+        if k not in colliding and hp_after[k] > 0:
             pos = knights_pos[k]
             for c in coords:
                 if pos[0] <= c[0] < pos[2] and pos[1] <= c[1] < pos[3]:
                     colliding.append(k)
-                    colliding = find_collide(knights_pos, calc_move(pos, dir), colliding, dir)
+                    colliding = find_collide(knights_pos, calc_move(pos, dir), hp_after, colliding, dir)
                     break
 
     return colliding
@@ -26,13 +26,12 @@ def wall_touch(knights_pos, colliding, dir):
     new_pos = [k for k in knights_pos]
     for c in colliding:
         new_pos[c] = calc_move(new_pos[c], dir)
-        # print("WALLTOUCH", c, new_pos[c])
         for j in range(new_pos[c][0], new_pos[c][2]):
             for k in range(new_pos[c][1], new_pos[c][3]):
                 if board[j][k] == 2:
+                    # print("NOPE", new_pos[c])
                     return True
 
-    # print("UPDATE", new_pos)
     for c in colliding:
         knights_pos[c] = new_pos[c]
     return False
@@ -77,18 +76,20 @@ for i in range(1, N + 1):
             k_board[j][k] = i
 
 for _ in range(Q):
+    # print("hp_after", hp_after[1:])
     # print("___________________________________________")
     i, d = map(int, input().split())
     if hp_after[i] != 0:
         dir = directions[d]
         next_pos = calc_move(knights_pos[i], dir)
         # print("i, d", [i, d], next_pos, knights_pos[1:])
-        colliding = find_collide(knights_pos, next_pos, [i], dir)
+        colliding = find_collide(knights_pos, next_pos, hp_after, [i], dir)
         # print("Colliding", colliding)
         if wall_touch(knights_pos, colliding, dir):
             continue
-        # print("knights_pos", knights_pos[1:])
         update_hp(i, colliding, board, knights_pos, hp_after)
+        # print("knights_pos", knights_pos[1:])
+
     # for row in k_board:
     #     print(row)
 
