@@ -109,6 +109,8 @@ for _ in range(K):
     # print("MOVES", moves)
     # print("MIN_SIZE", min_size)
     ranges = find_subboard(participants, out, N, min_size)
+    if ranges == []:
+        break
     # print("RANGES", ranges)
     # print("BOARD_BEFORE")
     # for row in board:
