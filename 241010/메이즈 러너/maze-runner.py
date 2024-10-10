@@ -94,7 +94,7 @@ for _ in range(K):
     # print("-------------------\nOUT", out)
     min_size = 20
     is_over = True
-    for i in range(M):
+    for i in range(1, M):
         if participants[i] != [0, 0]:
             is_over = False
             participants[i], dir = p_move(board, N, participants[i], out)
