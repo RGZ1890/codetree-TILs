@@ -92,7 +92,7 @@ board[out[0]][out[1]] = -10
 
 for _ in range(K):
     # print("-------------------\nOUT", out)
-    min_size = 20
+    min_size = 21
     is_over = True
     for i in range(M):
         if participants[i] != [0, 0]:
@@ -102,15 +102,13 @@ for _ in range(K):
             # print("POS_AFTER", i, participants[i])
             size_cand = max(abs(participants[i][0] - out[0]),
                             abs(participants[i][1] - out[1])) + 1
-            min_size = min(min_size, size_cand)
-    if is_over:
+            min_size = min(min_size, size_cand) if dir != -2 else min_size
+    if is_over or min_size == 21:
         break
     # print("PARTICIPANTS", participants)
     # print("MOVES", moves)
     # print("MIN_SIZE", min_size)
     ranges = find_subboard(participants, out, N, min_size)
-    if ranges == []:
-        break
     # print("RANGES", ranges)
     # print("BOARD_BEFORE")
     # for row in board:
