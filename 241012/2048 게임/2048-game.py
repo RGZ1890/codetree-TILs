@@ -76,7 +76,7 @@ ref, cnt = find_max(board, n)
 best_board = [row[:] for row in board]
 
 
-res = recursive_board(best_board, n, 1)
+res = recursive_board(best_board, n, 0)
 print(res[0])
 
 # print(ref)
