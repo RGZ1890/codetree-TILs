@@ -63,8 +63,7 @@ t = 0
 
 while True:
     over = True
-    if t < m:
-        move_camp(p_pos, t)
+
 
     for i in range(min(t, m)):
         if p_pos[i] == cvs[i]:
@@ -76,6 +75,9 @@ while True:
         if p_pos[i] == cvs[i]:
             board[cvs[i][0]][cvs[i][1]] = -1
 
+    if t < m:
+        move_camp(p_pos, t)
+        
     for c in cvs:
         if board[c[0]][c[1]] != -1:
             over = False
