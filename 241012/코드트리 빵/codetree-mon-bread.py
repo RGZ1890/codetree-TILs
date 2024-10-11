@@ -43,7 +43,7 @@ def move_camp(p_pos, i):
 n, m = map(int, input().split())
 board = [[0] * n for _ in range(n)]
 p_board = [[0] * n for _ in range(n)]
-p_pos = [[0, 0] for _ in range(m)]
+p_pos = [[31, 31] for _ in range(m)]
 cvs = [[0, 0] for _ in range(m)]
 camps = []
 
@@ -77,7 +77,7 @@ while True:
 
     if t < m:
         move_camp(p_pos, t)
-        
+
     for c in cvs:
         if board[c[0]][c[1]] != -1:
             over = False
