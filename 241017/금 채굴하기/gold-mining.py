@@ -3,9 +3,8 @@ def get_area(board, n, m, point, s):
 	for i in range(point[0] - s, point[0] + s + 1):
 		c = s - abs(i - point[0])
 		for j in range(point[1] - c, point[1] + c + 1):
-			if i < 0 or i >= n or j < 0 or j >= n:
-				return -1
-			golds += board[i][j]
+			if 0 <= i < n and 0 <= j < n:
+				golds += board[i][j]
 	if golds * m >= (s ** 2) + ((s + 1) ** 2):
 		return golds
 	return -1
