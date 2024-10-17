@@ -17,7 +17,7 @@ def main():
 		board[i] = list(map(int, input().split()))
 	
 	ans = 0
-	for i in range(n):
+	for i in range(n + 1):
 #		print("SIZE", i, end = ' ')
 		for j in range(n):
 			for k in range(n):
