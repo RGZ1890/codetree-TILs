@@ -23,14 +23,19 @@ def main():
         board[i] = [-1] + list(map(int, input().split())) + [-1]
     
     answer = 0
-    for i in range(1, n + 1):
-        start = [n, i]
-        for j in range(1, n - i + 1):
-            for k in range(1, i):
-                dist = [j, k, j, k]
-                res = move(board, start, dist)
-#               print("start", start, "dist", dist, "res", res)
-                answer = max(res, answer)
+    for i in range(2, n + 1):
+        for j in range(n - i + 1, n):
+            start = [i, j]
+#           print(start, n - j, n - i)
+            for ur in range(1, n - j + 1):
+                res = 0
+                for ul in range(1, n - ur):
+                    dist = [ur, ul, ur, ul]
+                    res = move(board, start, dist)
+#                   print("dist", dist, "res", res)
+                    answer = max(res, answer)
+                if res == -1:
+                    break
         
     print(answer)
 
