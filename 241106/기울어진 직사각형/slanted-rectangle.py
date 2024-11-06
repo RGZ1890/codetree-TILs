@@ -14,7 +14,21 @@ def move(board, start, dist):
             res += board[cur[0]][cur[1]]
     
     return res
-            
+
+
+def getRes(board, n, start):
+    res = 0
+    r, c = start[0], start[1]
+    for ur in range(1, min(n + 1 - c, r)):
+        for ul in range(1, min(c, r)):
+            dist = [ur, ul, ur, ul]
+            res = max(move(board, start, dist), res)
+#           print("dist", dist, "res", res)
+        if res == -1:
+            break
+
+    return res
+
 
 def main():
     n = int(input())
@@ -26,17 +40,9 @@ def main():
     for i in range(2, n + 1):
         for j in range(n - i + 1, n):
             start = [i, j]
-#           print(start, n - j, n - i)
-            for ur in range(1, n - j + 1):
-                res = 0
-                for ul in range(1, n - ur):
-                    dist = [ur, ul, ur, ul]
-                    res = move(board, start, dist)
-#                   print("dist", dist, "res", res)
-                    answer = max(res, answer)
-                if res == -1:
-                    break
-        
+#           print(start)
+            answer = max(getRes(board, n, start), answer)
+            
     print(answer)
 
 
