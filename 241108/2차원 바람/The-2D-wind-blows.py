@@ -9,7 +9,7 @@ def rotBoard(board, start, end):
 	board[start[0]][start[1]] = tmpBoard[start[0] + 1][start[1]]
 	for j in range(start[1], end[1] - 1):
 		board[end[0] - 1][j] = tmpBoard[end[0] - 1][j + 1] # LowerRow
-	board[end[0] - 1][end[1] - 1] = tmpBoard[end[0] - 1][end[1] - 1]
+	board[end[0] - 1][end[1] - 1] = tmpBoard[end[0] - 2][end[1] - 1]
 	for i in range(start[0] + 1, end[0] - 1):
 		board[i][start[1]] = tmpBoard[i + 1][start[1]]
 		board[i][end[1] - 1] = tmpBoard[i - 1][end[1] - 1]
