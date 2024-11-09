@@ -1,28 +1,25 @@
 def explode(board, n, r, c):
-	dist = board[r][c] - 1
-	board[r][c] = 0
+	dist = board[r][c]
 	for d in [[-1, 0], [0, 1], [1, 0], [0, -1]]:
-		cur = [r, c]
 		for i in range(dist):
-			cur = [cur[0] + d[0], cur[1] + d[1]]
-			if not (0 <= cur[0] < n and 0 <= cur[1] < n):
+			nr, nc = r + d[0] * i, c + d[1] * i
+			if 0 <= nr < n and 0 <= nc < n:
+				board[nr][nc] = 0
+			else:
 				break
-			board[cur[0]][cur[1]] = 0
 	
 	return board
 
 
 def affect(board, n):
 	for j in range(n):
-		tmp = [0] * n
 		i = n - 1
 		for k in range(n - 1, -1, -1):
 			if board[k][j] != 0:
-				tmp[i] = board[k][j]
+				if i != k:
+					board[i][j], board[k][j] = board[k][j], 0
 				i -= 1
-		for l in range(n):
-			board[l][j] = tmp[l]
-	
+				
 	return board
 
 
