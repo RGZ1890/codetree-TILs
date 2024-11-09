@@ -13,13 +13,13 @@ def moveBlock(block, s, e):
 
 
 def main():
-	n = int(sys.stdin.readline())
+	n = int(input())
 	block = [0] * n
 	for i in range(n):
-		block[i] = int(sys.stdin.readline())
+		block[i] = int(input())
 	
-	s1, e1 = map(int, sys.stdin.readline().split())
-	s2, e2 = map(int, sys.stdin.readline().split())
+	s1, e1 = map(int, input().split())
+	s2, e2 = map(int, input().split())
 	
 	block = moveBlock(block, s1, e1)
 	block = moveBlock(block, s2, e2)
