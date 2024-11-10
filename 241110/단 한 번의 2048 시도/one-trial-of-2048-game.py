@@ -22,23 +22,23 @@ def comb(board):
 
 def move(board, d):
 	if d == 'R':
-		tmpBoard = [[cell for cell in row[::-1]] for row in board]
+		board = [[cell for cell in row[::-1]] for row in board]
 	elif d == 'U':
-		tmpBoard = [[board[i][j] for i in range(4)] for j in range(4)]
+		board = [[board[i][j] for i in range(4)] for j in range(4)]
 	elif d == 'D':
-		tmpBoard = [[board[i][j] for i in range(3, -1, -1)] for j in range(4)]
+		board = [[board[i][j] for i in range(3, -1, -1)] for j in range(4)]
 		
-	tmpBoard = zfil(tmpBoard)
-	tmpBoard = comb(tmpBoard)
+	board = zfil(board)
+	board = comb(board)
 	
 	if d == 'R':
-		tmpBoard = [[cell for cell in row[::-1]] for row in tmpBoard]
+		board = [[cell for cell in row[::-1]] for row in board]
 	elif d == 'U':
-		tmpBoard = [[tmpBoard[i][j] for i in range(4)] for j in range(4)]
+		board = [[board[i][j] for i in range(4)] for j in range(4)]
 	elif d == 'D':
-		tmpBoard = [[tmpBoard[i][j] for i in range(4)] for j in range(3, -1, -1)]
+		board = [[board[i][j] for i in range(4)] for j in range(3, -1, -1)]
 	
-	return tmpBoard
+	return board
 
 
 def main():
