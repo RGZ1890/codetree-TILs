@@ -1,6 +1,6 @@
 def zfil(board):
 	for i in range(4):
-		for j in range(1, 4):
+		for j in range(3, 0, -1):
 			if board[i][j - 1] == 0:
 				board[i][j], board[i][j - 1] = board[i][j - 1], board[i][j]
 	
@@ -29,6 +29,7 @@ def move(board, d):
 		board = [[board[i][j] for i in range(3, -1, -1)] for j in range(4)]
 		
 	board = zfil(board)
+	
 	board = comb(board)
 	
 	if d == 'R':
