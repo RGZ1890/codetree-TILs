@@ -1,25 +1,27 @@
 def explode(stac, l, M):
 	i = 1
 	s, e = 0, -1
-	for i in range(l):
+	while i < len(stac):
 		if stac[s] == stac[i]:
 			e = i
 		else:
 			if e - s + 1 >= M:
-				return s, e
+#				print("___________", s, e, stac)
+				stac = exclude(stac, len(stac), s, e)
+				s, e, i = 0, -1, 0
 			else:
 				s = i
+		i += 1
 		
-	return s, e
+	return stac[:-1]
 
 
 def exclude(stac, l, s, e):
-	tmp = [0] * (len(stac) - (e - s + 1))
-	j = 0
+	tmp = []
 	for i in range(l):
-		if not (s <= i <= e):
-			tmp[j] = stac[i]
-			j += 1
+		if s <= i <= e:
+			continue
+		tmp.append(stac[i])
 			
 	return tmp
 
@@ -30,13 +32,10 @@ def main():
 	for i in range(N):
 		stac[i] = int(input())
 	
+	stac += [0]
 	
-	while True:
-		l = len(stac)
-		s, e = explode(stac, l, M)
-		if s - e + 1 >= M or l < M:
-			break
-		stac = exclude(stac, l, s, e)
+	l = len(stac)
+	stac = explode(stac, l, M)
 	
 	l = len(stac)
 	print(l)
