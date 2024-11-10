@@ -1,41 +1,46 @@
 def explode(stac, l, M):
 	i = 1
 	s, e = 0, -1
-	while i < len(stac):
+	coor = []
+	for i in range(l):
 		if stac[s] == stac[i]:
 			e = i
 		else:
 			if e - s + 1 >= M:
-#				print("___________", s, e, stac)
-				stac = exclude(stac, len(stac), s, e)
-				s, e, i = 0, -1, 0
-			else:
-				s = i
-		i += 1
+				coor.append([s, e])
+			s, e = i, -1
 		
-	return stac[:-1]
+	return coor
 
 
-def exclude(stac, l, s, e):
+def exclude(stac, l, coor):
 	tmp = []
 	for i in range(l):
-		if s <= i <= e:
-			continue
-		tmp.append(stac[i])
+		isIn = False
+		for c in coor:
+			if c[0] <= i <= c[1]:
+				isIn = True
+				break
+		if not isIn:
+			tmp.append(stac[i])
 			
 	return tmp
 
 
 def main():
 	N, M = map(int, input().split())
-	stac = [0] * N
+	stac = [0] * (N + 1)
 	for i in range(N):
 		stac[i] = int(input())
 	
-	stac += [0]
+	while True:
+		l = len(stac)
+		coor = explode(stac, l, M)
+		if not coor:
+			break
+		stac = exclude(stac, l, coor)
 	
-	l = len(stac)
-	stac = explode(stac, l, M)
+	stac = stac[:-1]
 	
 	l = len(stac)
 	print(l)
