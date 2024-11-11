@@ -37,13 +37,12 @@ def explode(board, N, M):
 				for k in range(c[0], c[1]):
 					board[k][j] = 0
 					
-	return align(board, N)
+	return board
 
 
 def rotate(board, N):
 	board = [[board[i][j] for i in range(N - 1, -1, -1)] for j in range(N)]
-	
-	
+
 	return align(board, N)
 
 
@@ -55,6 +54,7 @@ def main():
 	
 	for _ in range(K):
 		board = explode(board, N, M)
+		board = align(board, N)
 		board = rotate(board, N)
 		
 	answer = getSum(board, N)
