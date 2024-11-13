@@ -12,7 +12,7 @@ def getSum(board, N):
 	return ret
 
 
-def explode2(board, N, M):
+def explode(board, N, M):
 	while True:
 		cont = False
 		for j in range(N):
@@ -33,19 +33,17 @@ def explode2(board, N, M):
 				else:
 					if streak >= M:
 						cont = True
-						if queue:
-							for _ in range(streak):
-								queue.pop()
+						for _ in range(streak):
+							queue.pop()
 					queue.append(board[i][j])
 					streak = 1
 			
-			tmp = [0] * (N - len(queue)) + list(queue)
+			tmp = N - len(queue)
 			for i in range(N):
-				board[i][j] = tmp[i]
+				board[i][j] = 0 if i < tmp else queue[i - tmp]
 		if not cont:
 			break
-							
-					
+
 							
 	return board
 
@@ -71,18 +69,10 @@ def main():
 		board[i] = list(map(int, input().split()))
 		
 	for _ in range(K):
-#		print("===========", _, "==============")
-		board = explode2(board, N, M)
-#		print("Exp")
-#		for row in board:
-#			print(*row)
-			
+		board = explode(board, N, M)
 		board = rotate(board, N)
-#		print("Rot")
-#		for row in board:
-#			print(*row)
 	
-	board = explode2(board, N, M)
+	board = explode(board, N, M)
 		
 	answer = getSum(board, N)
 	print(answer)
