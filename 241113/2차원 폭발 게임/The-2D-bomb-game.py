@@ -31,7 +31,7 @@ def explode2(board, N, M):
 			queue = deque()
 			streak = 1
 			for i in range(N):
-				if board[i][j] == 0:
+				if board[i][j] == 0 or M == 1:
 					continue
 				last = queue[-1] if queue else -1
 				
@@ -45,8 +45,9 @@ def explode2(board, N, M):
 				else:
 					if streak >= M:
 						cont = True
-						for _ in range(streak):
-							queue.pop()
+						if queue:
+							for _ in range(streak):
+								queue.pop()
 					queue.append(board[i][j])
 					streak = 1
 			
