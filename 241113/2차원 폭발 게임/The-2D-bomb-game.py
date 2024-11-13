@@ -38,9 +38,10 @@ def explode(board, N, M):
 					queue.append(board[i][j])
 					streak = 1
 			
-			tmp = N - len(queue)
+			tmp = [0] * (N - len(queue)) + list(queue)
 			for i in range(N):
-				board[i][j] = 0 if i < tmp else queue[i - tmp]
+				board[i][j] = tmp[i]
+				
 		if not cont:
 			break
 
