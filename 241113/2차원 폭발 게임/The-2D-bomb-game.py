@@ -3,25 +3,13 @@ from collections import deque
 
 def getSum(board, N):
 	ret = 0
-	for i in range(N):
-		for j in range(N):
-			if board[i][j] != 0:
-				ret += 1
+	for j in range(N):
+		for i in range(N - 1, -1, -1):
+			if board[i][j] == 0:
+				break
+			ret += 1
 	
 	return ret
-
-
-def align(board, N):
-	for j in range(N):
-		queue = deque()
-		for i in range(N):
-			if board[i][j] != 0:
-				queue.append(board[i][j])
-		tmp = [0] * (N - len(queue)) + list(queue)
-		for i in range(N):
-			board[i][j] = tmp[i]
-		
-	return board
 
 
 def explode2(board, N, M):
@@ -73,7 +61,7 @@ def rotate(board, N):
 		for i in range(N):
 			board[i][j] = tmp[i]
 
-	return align(board, N)
+	return board
 
 
 def main():
