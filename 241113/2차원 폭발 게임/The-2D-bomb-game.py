@@ -1,3 +1,6 @@
+from collections import deque
+
+
 def getSum(board, N):
 	ret = 0
 	for i in range(N):
@@ -10,38 +13,64 @@ def getSum(board, N):
 
 def align(board, N):
 	for j in range(N):
-		zidx = N - 1
-		for i in range(N - 1, -1, -1):
+		queue = deque()
+		for i in range(N):
 			if board[i][j] != 0:
-				for k in range(zidx, i, -1):
-					if board[k][j] == 0:
-						board[i][j], board[k][j] = board[k][j], board[i][j]
-						zidx = k - 1
-						break
+				queue.append(board[i][j])
+		tmp = [0] * (N - len(queue)) + list(queue)
+		for i in range(N):
+			board[i][j] = tmp[i]
 		
 	return board
 
 
-def explode(board, N, M):
-	for j in range(N):
-		s = 0
-		coor = []
-		for i in range(1, N + 1):
-			if board[s][j] == 0:
-				s = i
-			if i == N or board[i][j] != board[s][j]:
-				coor.append([s, i])
-				s = i
-		for c in coor:
-			if c[1] - c[0] >= M:
-				for k in range(c[0], c[1]):
-					board[k][j] = 0
+def explode2(board, N, M):
+	while True:
+		cont = False
+		for j in range(N):
+			queue = deque()
+			streak = 1
+			for i in range(N):
+				if board[i][j] == 0:
+					continue
+				last = queue[-1] if queue else -1
+				
+				if last == board[i][j]:
+					queue.append(board[i][j])
+					streak += 1
+					if i == N - 1 and streak >= M:
+						cont = True
+						for _ in range(streak):
+							queue.pop()
+				else:
+					if streak >= M:
+						cont = True
+						for _ in range(streak):
+							queue.pop()
+					queue.append(board[i][j])
+					streak = 1
+			
+			tmp = [0] * (N - len(queue)) + list(queue)
+			for i in range(N):
+				board[i][j] = tmp[i]
+		if not cont:
+			break
+							
 					
-	return align(board, N)
+							
+	return board
 
 
 def rotate(board, N):
 	board = [[board[i][j] for i in range(N - 1, -1, -1)] for j in range(N)]
+	for j in range(N):
+		queue = deque()
+		for i in range(N):
+			if board[i][j] != 0:
+				queue.append(board[i][j])
+		tmp = [0] * (N - len(queue)) + list(queue)
+		for i in range(N):
+			board[i][j] = tmp[i]
 
 	return align(board, N)
 
@@ -52,24 +81,21 @@ def main():
 	for i in range(N):
 		board[i] = list(map(int, input().split()))
 		
-	answer = -1
-	
 	for _ in range(K):
-		while True:
-			board = explode(board, N, M)
-			ns = getSum(board, N)
-			if ns == answer:
-				break
-			answer = ns
+#		print("===========", _, "==============")
+		board = explode2(board, N, M)
+#		print("Exp")
+#		for row in board:
+#			print(*row)
+			
 		board = rotate(board, N)
-		
-	while True:
-		board = explode(board, N, M)
-		ns = getSum(board, N)
-		if answer == ns:
-			break
-		answer = ns
+#		print("Rot")
+#		for row in board:
+#			print(*row)
 	
+	board = explode2(board, N, M)
+		
+	answer = getSum(board, N)
 	print(answer)
 	
 
