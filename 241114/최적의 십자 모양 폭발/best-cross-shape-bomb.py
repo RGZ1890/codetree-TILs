@@ -26,10 +26,10 @@ def cntBoard(tmpBoard, n):
 			if tmpBoard[r][c] != 0:
 				for d in directions:
 					nr, nc = r + d[0], c + d[1]
-					if 0 <= nr < n and 0 <= nc < n:
-						if tmpBoard[r][c] == tmpBoard[nr][nc]:
-							res += 1
-							tmpBoard[nr][nc] = 0
+					if 0 <= nr < n and 0 <= nc < n and \
+					tmpBoard[r][c] == tmpBoard[nr][nc]:
+						res += 1
+#						tmpBoard[nr][nc] = 0
 				tmpBoard[r][c] = 0
 				
 	return res
@@ -46,9 +46,10 @@ def main():
 	for i in range(n):
 		for j in range(n):
 			tmpBoard = explode(board, n, i, j)
-#			print([i, j])
+#			print("===============", [i, j])
 #			for row in tmpBoard:
 #				print(*row)
+#			print("-----------CNT", cntBoard(tmpBoard, n))
 			
 			answer = max(answer, cntBoard(tmpBoard, n))
 			
