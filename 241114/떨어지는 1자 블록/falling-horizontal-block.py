@@ -1,4 +1,6 @@
 def moveable(board, n, block, r):
+	if r >= n:
+		return True
 	for j in range(block[0], block[1]):
 		if board[r][j] != 0:
 			return False
