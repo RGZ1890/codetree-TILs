@@ -1,5 +1,3 @@
-from collections import deque
-
 directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
 def explode(board, n, r, c):
@@ -15,9 +13,8 @@ def explode(board, n, r, c):
 	for j in range(n):
 		tmpList = []
 		for i in range(n):
-			if board[i][j] != 0:
-				tmpList.append(board[i][j])
-				
+			if tmpBoard[i][j] != 0:
+				tmpList.append(tmpBoard[i][j])
 		tmpList = [0] * (n - len(tmpList)) + tmpList
 		for i in range(n):
 			tmpBoard[i][j] = tmpList[i]
@@ -35,7 +32,6 @@ def cntBoard(tmpBoard, n):
 					if 0 <= nr < n and 0 <= nc < n and \
 					tmpBoard[r][c] == tmpBoard[nr][nc]:
 						res += 1
-#						tmpBoard[nr][nc] = 0
 				tmpBoard[r][c] = 0
 				
 	return res
