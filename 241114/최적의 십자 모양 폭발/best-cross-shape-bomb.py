@@ -1,7 +1,9 @@
+from collections import deque
+
 directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
 def explode(board, n, r, c):
-	tmpBoard = [[cell for cell in row] for row in board]
+	tmpBoard = [row[:] for row in board]
 	dist = tmpBoard[r][c]
 	tmpBoard[r][c] = 0
 	for d in directions:
@@ -11,7 +13,11 @@ def explode(board, n, r, c):
 				tmpBoard[nr][nc] = 0
 	
 	for j in range(n):
-		tmpList = [tmpBoard[i][j] for i in range(n) if tmpBoard[i][j] != 0]
+		tmpList = []
+		for i in range(n):
+			if board[i][j] != 0:
+				tmpList.append(board[i][j])
+				
 		tmpList = [0] * (n - len(tmpList)) + tmpList
 		for i in range(n):
 			tmpBoard[i][j] = tmpList[i]
@@ -46,11 +52,6 @@ def main():
 	for i in range(n):
 		for j in range(n):
 			res = explode(board, n, i, j)
-#			print("===============", [i, j])
-#			for row in tmpBoard:
-#				print(*row)
-#			print("-----------CNT", cntBoard(tmpBoard, n))
-			
 			answer = max(answer, res)
 			
 	print(answer)
