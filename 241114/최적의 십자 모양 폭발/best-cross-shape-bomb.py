@@ -16,7 +16,7 @@ def explode(board, n, r, c):
 		for i in range(n):
 			tmpBoard[i][j] = tmpList[i]
 	
-	return tmpBoard
+	return cntBoard(tmpBoard, n)
 
 
 def cntBoard(tmpBoard, n):
@@ -45,13 +45,13 @@ def main():
 	answer = -1
 	for i in range(n):
 		for j in range(n):
-			tmpBoard = explode(board, n, i, j)
+			res = explode(board, n, i, j)
 #			print("===============", [i, j])
 #			for row in tmpBoard:
 #				print(*row)
 #			print("-----------CNT", cntBoard(tmpBoard, n))
 			
-			answer = max(answer, cntBoard(tmpBoard, n))
+			answer = max(answer, res)
 			
 	print(answer)
 
