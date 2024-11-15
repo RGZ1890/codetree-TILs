@@ -8,7 +8,7 @@ def turn(d, bound):
 
 def move(board, N, cpos, cdir):
 	npos = [cpos[0] + dirs[cdir][0], cpos[1] + dirs[cdir][1]]
-#	print(cpos, npos, cdir)
+	print(cpos, cdir)
 	if board[npos[0]][npos[1]] == 1:
 		cdir = turn(cdir, 'L')
 		return move(board, N, cpos, cdir)
@@ -24,12 +24,13 @@ def move(board, N, cpos, cdir):
 def trav(board, N, cpos, start):
 	t = 0
 	cdir = 1
+	
 	while True:
 		t += 1
 		npos, ndir = move(board, N, cpos, cdir)
 		if board[npos[0]][npos[1]] == -1:
 			break
-		if npos == start:
+		if npos == start or npos == cpos:
 			return -1
 		cpos, cdir = npos, ndir
 	
