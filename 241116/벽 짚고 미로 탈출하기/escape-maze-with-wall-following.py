@@ -31,13 +31,13 @@ def main():
 			board[i][j] = 1 if s[j - 1] == '#' else 0
 			
 	answer = 0
-	cdir = 1
+	sdir = cdir = 1
 	
 	while True:
 		answer += 1
 		npos, ndir = move(board, cpos, cdir)
 #		print(cpos, '->', npos, cdir, '->', ndir)
-		if npos == start or npos == cpos:
+		if (npos == start and ndir == sdir) or npos == cpos:
 			answer = -1
 			break
 		elif board[npos[0]][npos[1]] == -1:
