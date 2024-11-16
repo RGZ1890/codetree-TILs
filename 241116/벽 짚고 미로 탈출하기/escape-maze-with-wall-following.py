@@ -36,8 +36,8 @@ def main():
 	while True:
 		answer += 1
 		npos, ndir = move(board, cpos, cdir)
-#		print(cpos, '->', npos, cdir, '->', ndir)
-		if (npos == start and ndir == sdir) or npos == cpos:
+#		print(cpos, cdir, '->', npos, ndir)
+		if (npos == start and cdir == sdir) or npos == cpos:
 			answer = -1
 			break
 		elif board[npos[0]][npos[1]] == -1:
