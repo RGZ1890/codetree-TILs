@@ -8,9 +8,16 @@ def turn(d, bound):
 
 def move(board, N, cpos, cdir):
 	npos = [cpos[0] + dirs[cdir][0], cpos[1] + dirs[cdir][1]]
+#	print(cpos, cdir)
 	if board[npos[0]][npos[1]] == 1:
-		cdir = turn(cdir, 'L')
-		return move(board, N, cpos, cdir)
+		for i in range(4):
+			cdir = turn(cdir, 'L')
+			npos = [cpos[0] + dirs[cdir][0], cpos[1] + dirs[cdir][1]]
+			if board[npos[0]][npos[1]] == 1:
+				npos = cpos
+			else:
+				break
+			
 	elif board[npos[0]][npos[1]] == 0:
 		ndir = turn(cdir, 'R')
 		nnpos = [npos[0] + dirs[ndir][0], npos[1] + dirs[ndir][1]]
