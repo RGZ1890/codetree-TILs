@@ -11,7 +11,7 @@ def move(board, cpos, cdir):
 				npos = cpos
 			else:
 				break
-	if board[npos[0]][npos[1]] == 0:
+	elif board[npos[0]][npos[1]] == 0:
 		ndir = cdir + 1 if cdir < 3 else 0
 		nnpos = [npos[0] + dirs[ndir][0], npos[1] + dirs[ndir][1]]
 		if board[nnpos[0]][nnpos[1]] == 0:
