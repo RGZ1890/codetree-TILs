@@ -37,8 +37,8 @@ def main():
 		for _ in range(p):
 			answer += 1
 			board, snake = move(board, N, snake, d)
-			print("ANSWER", answer)
-			print("SNAKE", snake)
+#			print("ANSWER", answer)
+#			print("SNAKE", snake)
 			if not snake:
 				break
 		if not snake:
