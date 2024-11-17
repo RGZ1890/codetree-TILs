@@ -38,22 +38,15 @@ def main():
 			beeds[i][0], beeds[i][1], beeds[i][2] = int(x) - 1, int(y) - 1, ddict[d]
 		
 		answer = 0
-		for _ in range(N ** 2 + 1):
+		for _ in range(N * 2 + 1):
 			for i in range(M):
 				if avail(beeds[i]):
 					beeds[i] = move(N, beeds[i])
 			beeds = updatebeeds(beeds, M)
-			
-			answer = 0
-			for i in range(M):
-				answer += 1 if avail(beeds[i]) else 0
-			if answer == 1:
-				break
 		
-		if answer != 1:
-			answer = 0
-			for i in range(M):
-				answer += 1 if avail(beeds[i]) else 0
+		answer = 0
+		for i in range(M):
+			answer += 1 if avail(beeds[i]) else 0
 		print(answer)
 
 
