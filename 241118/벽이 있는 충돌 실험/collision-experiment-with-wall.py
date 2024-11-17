@@ -39,10 +39,14 @@ def main():
 		
 		answer = 0
 		for _ in range(N * 2 + 1):
+			cnt = 0
 			for i in range(M):
 				if avail(beeds[i]):
+					cnt += 1
 					beeds[i] = move(N, beeds[i])
 			beeds = updatebeeds(beeds, M)
+			if cnt <= 1:
+				break
 		
 		answer = 0
 		for i in range(M):
