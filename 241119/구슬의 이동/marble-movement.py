@@ -50,7 +50,11 @@ def main():
 		for i in range(m):
 			if marbles[i][0] != -1:
 				marbles[i] = move(marbles[i], n)
-			marbles = checkCollide(marbles, m, k)
+		
+		marbles = checkCollide(marbles, m, k)
+		
+#		print(*marbles)
+
 
 	answer = 0
 	for m in marbles:
