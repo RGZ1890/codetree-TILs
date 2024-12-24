@@ -1,15 +1,14 @@
 INF = 200000
 
 def solution(adj, n, visited, pos, cur, cnt, ans):
-    if cur > ans:
+    if cur > ans or cnt > n:
         return ans
     
-    if cnt == n:
-#       print("DONE", min(ans, cur) if pos == 0 else ans)
-        return min(ans, cur) if pos == 0 else ans
+    if cnt == n and pos == 0:
+        return min(ans, cur)
     
     for dest in range(n):
-        if not visited[dest] and adj[pos][dest] != 0:
+        if not visited[dest]:
             visited[dest] = True
             ans = solution(adj, n, visited, dest, cur + adj[pos][dest], cnt + 1, ans)
             visited[dest] = False
@@ -23,6 +22,8 @@ def main():
     visited = [False] * n
     for i in range(n):
         adj[i] = list(map(int, input().split()))
+        for j in range(n):
+            adj[i][j] = INF if adj[i][j] == 0 else adj[i][j]
     
     print(solution(adj, n, visited, 0, 0, 0, INF))
     
