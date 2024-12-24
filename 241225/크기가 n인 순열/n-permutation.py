@@ -1,4 +1,4 @@
-def choose(n, cur, ans):
+def choose(n, visited, cur, ans):
     if cur == n + 1:
         print(*ans)
         return
@@ -8,15 +8,16 @@ def choose(n, cur, ans):
             continue
 
         visited[i] = True
-        ans.append(i)
-        choose(n, cur + 1, ans)
-        ans.pop()
+        choose(n, visited, cur + 1, ans + [i])
         visited[i] = False
+        
 
+def main():
+    n = int(input())
+    
+    visited = [False] * (n + 1)
+    choose(n, visited, 1, [])
+    
 
-n = int(input())
-
-visited = [False] * (n + 1)
-ans = []
-
-choose(n, 1, ans)
+if __name__ == "__main__":
+    main()
