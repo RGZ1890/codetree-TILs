@@ -1,14 +1,14 @@
 INF = 200000
 
 def solution(adj, n, visited, pos, cur, cnt, ans):
-    if cur > ans or cnt > n:
+    if cur >= ans or cnt > n:
         return ans
     
     if cnt == n and pos == 0:
         return min(ans, cur)
     
     for dest in range(n):
-        if not visited[dest]:
+        if not visited[dest] and cur + adj[pos][dest] < ans:
             visited[dest] = True
             ans = solution(adj, n, visited, dest, cur + adj[pos][dest], cnt + 1, ans)
             visited[dest] = False
