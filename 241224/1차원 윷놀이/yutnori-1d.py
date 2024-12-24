@@ -1,7 +1,7 @@
 def get_score(m, moves, n, k, choices):
     pos = [1 for _ in range(k)]
     for i in range(n):
-        pos[coices[i]] += moves[i]
+        pos[choices[i]] += moves[i]
 
     score = sum(1 for p in pos if p >= m)
 #   print("moves", moves, "pos", pos, "choices", choices, "score", score)
