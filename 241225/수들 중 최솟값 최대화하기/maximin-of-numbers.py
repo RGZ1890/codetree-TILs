@@ -1,6 +1,9 @@
 INF = 10001
 
 def solution(board, n, visited, row, cur, ans):
+    if cur <= ans:
+        return ans
+    
     if row == n:
         return max(cur, ans)
     
