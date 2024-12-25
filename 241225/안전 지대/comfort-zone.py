@@ -44,7 +44,7 @@ def main():
         for t in tmp:
             possible_k.add(t)
             possible_k.add(t - 1)
-#           possible_k.add(t + 1)
+            possible_k.add(t + 1)
     
     solution(board, N, M, possible_k)
     
