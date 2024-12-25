@@ -14,7 +14,9 @@ def dfs(board, visited, K, cur):
 def solution(board, N, M, thres):
     ans_k, ans_cnt = -1, -1
     for K in range(1, thres + 1):
-        visited = [[False] * (M + 2) for _ in range(N + 2)]
+        visited = [[True] + [False] * M + [True] for _ in range(N + 2)]
+        visited[0], visited[N + 1] = [[False] * (M + 2)], [[False] * (M + 2)]
+        
         cnt = 0
         
         for i in range(1, N + 1):
