@@ -38,7 +38,7 @@ def main():
     
     for i in range(N):
         board[i] = list(map(int, input().split()))
-        thres = max(thres, max(tmp))
+        thres = max(thres, max(board[i]))
         
     solution(board, N, M, thres)
     
