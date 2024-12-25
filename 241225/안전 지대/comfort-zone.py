@@ -37,13 +37,14 @@ def main():
     N, M = map(int, input().split())
     board = [[0] * M for _ in range(N)]
     possible_k = set()
-    possible_k.add(1)
     
     for i in range(N):
         tmp = list(map(int, input().split()))
         board[i] = tmp
         for t in tmp:
             possible_k.add(t)
+            possible_k.add(t - 1)
+#           possible_k.add(t + 1)
     
     solution(board, N, M, possible_k)
     
