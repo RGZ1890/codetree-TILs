@@ -12,8 +12,8 @@ def dfs(board, visited, K, cur):
 
 
 def solution(board, N, M, thres):
-    ans_k, ans_cnt = 0, 0
-    for K in range(1, thres):
+    ans_k, ans_cnt = -1, -1
+    for K in range(1, thres + 1):
         visited = [[False] * (M + 2) for _ in range(N + 2)]
         cnt = 0
         
@@ -23,7 +23,7 @@ def solution(board, N, M, thres):
                     visited[i][j] = True
                     cnt += 1
                     visited = dfs(board, visited, K, [i, j])
-    
+        
         if cnt > ans_cnt:
             ans_k, ans_cnt = K, cnt
         
