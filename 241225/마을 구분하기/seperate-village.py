@@ -7,7 +7,7 @@ def dfs(board, visited, cur, cnt):
         if board[new_pos[0]][new_pos[1]] != 0 and \
         not visited[new_pos[0]][new_pos[1]]:
             visited[new_pos[0]][new_pos[1]] = True
-            return dfs(board, visited, new_pos, cnt + 1)
+            visited, cnt = dfs(board, visited, new_pos, cnt + 1)
     
     return visited, cnt
 
@@ -27,8 +27,8 @@ def solution(board, n):
 
 def main():
     n = int(input())
-    
     board = [[0] * (n + 2) for _ in range(n + 2)]
+    
     for i in range(1, n + 1):
         tmp = list(map(int, input().split()))
         board[i] = [0] + tmp + [0]
