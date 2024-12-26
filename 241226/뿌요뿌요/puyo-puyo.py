@@ -19,10 +19,11 @@ def solution(board, n):
     for i in range(n):
         for j in range(n):
             if not visited[i][j]:
-                visited, cnt = dfs(board, n, visited, [i, j], board[i][j], 0)
+                visited[i][j] = True
+                visited, cnt = dfs(board, n, visited, [i, j], board[i][j], 1)
+                ans_cnt = max(cnt, ans_cnt)
                 if cnt >= 4:
                     ans_blk += 1
-                    ans_cnt = max(cnt, ans_cnt)
                     
     print(ans_blk, ans_cnt)
     
