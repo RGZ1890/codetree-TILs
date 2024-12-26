@@ -26,10 +26,10 @@ def bfs(board, n, s, avail):
 
 
 def solution(board, n, starts, rocks, lr, r_cnt, ans):
-#   print("RCNT", r_cnt, ans)
     if r_cnt == lr:
         avail = set()
         for s in starts:
+            avail.add((s[0], s[1]))
             avail = bfs(board, n, s, avail)
         return max(ans, len(avail))
     
