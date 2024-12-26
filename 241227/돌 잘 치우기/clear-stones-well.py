@@ -47,7 +47,7 @@ def solution(board, n, starts, rocks, cur, m):
             best_pos = r
         board[r[0]][r[1]] = 1
     
-    if cur == m:
+    if cur >= m:
         return best_cnt
     
     board[best_pos[0]][best_pos[1]] = 0
