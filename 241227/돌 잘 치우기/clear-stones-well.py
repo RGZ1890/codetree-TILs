@@ -61,7 +61,10 @@ def main():
         for r in rocks:
             board[r[0]][r[1]] = 0
         m = 0
-    print(solution(board, n, starts, rocks, min(len(rocks), m), 0, 0))
+    if len(rocks) - m < n:
+        print(n ** 2 - len(rocks) + m)
+    else:
+        print(solution(board, n, starts, rocks, min(len(rocks), m), 0, 0))
         
         
 if __name__ == "__main__":
