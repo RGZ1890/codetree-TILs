@@ -22,30 +22,34 @@ def bfs(board, n, s, avail):
     return avail
 
 
-def solution(board, n, starts, rocks, m):
-    ans = 0
+def solution(board, n, starts, rocks, cur, m):
     avail = set()
     for s in starts:
         avail = bfs(board, n, s, avail)
-    best_cnt = len(avail)
-    
-    for _ in range(m):
-        best_pos = [-1, -1]
-        for r in rocks:
-            board[r[0]][r[1]] = 0
-            avail = set()
-            for s in starts:
-                avail = bfs(board, n, s, avail)
-                
-            cnt = len(avail)
-            if best_cnt < cnt:
-                best_cnt = cnt
-                best_pos = r
-            board[r[0]][r[1]] = 1
-            
-        board[best_pos[0]][best_pos[1]] = 0
         
-    return best_cnt
+    best_cnt = len(avail)
+    best_pos = [-1, -1]
+    
+    for r in rocks:
+        if board[r[0]][r[1]] == 0:
+            continue
+        board[r[0]][r[1]] = 0
+        avail = set()
+        for s in starts:
+            avail.add((s[0], s[1]))
+            avail = bfs(board, n, s, avail)
+        cnt = len(avail)
+        if best_cnt < cnt:
+            best_cnt = cnt
+            best_pos = r
+        board[r[0]][r[1]] = 1
+    
+    if cur == m:
+        return best_cnt
+    
+    board[best_pos[0]][best_pos[1]] = 0
+        
+    return solution(board, n, starts, rocks, cur + 1, m)
     
 
 def main():
@@ -63,7 +67,7 @@ def main():
         r, c = map(int, input().split())
         starts[i] = [r - 1, c - 1]
         
-    print(solution(board, n, starts, rocks, m))
+    print(solution(board, n, starts, rocks, 1, m))
         
         
 if __name__ == "__main__":
