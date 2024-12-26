@@ -1,25 +1,22 @@
 from collections import deque
 
-dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]]
-
+dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
 def bfs(board, n, m):
-    start, end = [1, 1], [n, m]
+    start, end = (1, 1), (n, m)
     visited = [[False] * (m + 2) for _ in range(n + 2)]
     visited[start[0]][start[1]] = True
-    q = deque()
-    q.append(start)
+    q = deque([start])
     
     while q:
-        cur = q.popleft()
-        if cur == end:
+        cur_row, cur_col = q.popleft()
+        if (cur_row, cur_col) == end:
             return 1
-        for d in dirs:
-            nex = [cur[0] + d[0], cur[1] + d[1]]
-            if not visited[nex[0]][nex[1]] \
-            and board[nex[0]][nex[1]] == 1:
-                visited[nex[0]][nex[1]] = True
-                q.append(nex)
+        for dr, dc in dirs:
+            next_row, next_col = cur_row + dr, cur_col + dc
+            if not visited[next_row][next_col] and board[next_row][next_col] == 1:
+                visited[next_row][next_col] = True
+                q.append((next_row, next_col))
                 
     return 0
 
