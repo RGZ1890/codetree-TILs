@@ -1,4 +1,7 @@
 from collections import deque
+import sys
+
+sys.setrecursionlimit(8 ** 8)
 
 dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
