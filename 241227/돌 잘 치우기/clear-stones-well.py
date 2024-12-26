@@ -24,9 +24,9 @@ def bfs(board, n, s, avail):
 
 def solution(board, n, starts, rocks, m):
     ans = 0
+    best_cnt = 0
     for _ in range(m):
         best_pos = [-1, -1]
-        best_cnt = 0
         for r in rocks:
             board[r[0]][r[1]] = 0
             avail = set()
