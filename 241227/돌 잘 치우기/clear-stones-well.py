@@ -57,10 +57,6 @@ def main():
         r, c = map(int, input().split())
         starts[i] = [r - 1, c - 1]
     
-    if len(rocks) <= m:
-        for r in rocks:
-            board[r[0]][r[1]] = 0
-        m = 0
     if len(rocks) - m < n:
         print(n ** 2 - len(rocks) + m)
     else:
