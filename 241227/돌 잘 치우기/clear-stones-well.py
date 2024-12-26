@@ -26,6 +26,7 @@ def bfs(board, n, s, avail):
 
 
 def solution(board, n, starts, rocks, lr, r_cnt, ans):
+#   print("RCNT", r_cnt, ans)
     if r_cnt == lr:
         avail = set()
         for s in starts:
@@ -55,7 +56,11 @@ def main():
     for i in range(k):
         r, c = map(int, input().split())
         starts[i] = [r - 1, c - 1]
-        
+    
+    if len(rocks) <= m:
+        for r in rocks:
+            board[r[0]][r[1]] = 0
+        m = 0
     print(solution(board, n, starts, rocks, min(len(rocks), m), 0, 0))
         
         
