@@ -5,7 +5,10 @@ sys.setrecursionlimit(8 ** 8)
 
 dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
-def bfs(board, n, s, avail):
+def bfs(board, n, s, rock, avail):
+    for r in rock:
+        board[r[0]][r[1]] = 0
+        
     visited = [[False] * n for _ in range(n)]
     visited[s[0]][s[1]] = True
     q = deque()
@@ -21,26 +24,31 @@ def bfs(board, n, s, avail):
                 visited[nex[0]][nex[1]] = True
                 avail.add((nex[0], nex[1]))
                 q.append(nex)
+    
+    for r in rock:
+        board[r[0]][r[1]] = 1
                 
     return avail
 
 
-def solution(board, n, starts, rocks, lr, r_cnt, ans):
-    if r_cnt == lr:
-        avail = set()
-        for s in starts:
-            avail.add((s[0], s[1]))
-            avail = bfs(board, n, s, avail)
-        return max(ans, len(avail))
+def pick_rock(board, n, starts, rocks, lr, picked, cur, m, ans):
+    if cur == lr:
+        if len(picked) == m:
+#           print("PICKED", picked)
+            rock = [rocks[p] for p in picked]
+            avail = set()
+            for s in starts:
+                avail.add((s[0], s[1]))
+                avail = bfs(board, n, s, rock, avail)
+                
+            return max(ans, len(avail))
+        return ans
     
-    for r in rocks:
-        if board[r[0]][r[1]] == 1:
-            board[r[0]][r[1]] = 0
-            ans = solution(board, n, starts, rocks, lr, r_cnt + 1, ans)
-            board[r[0]][r[1]] = 1
+    ans = pick_rock(board, n, starts, rocks, lr, picked + [cur], cur + 1, m, ans)
+    ans = pick_rock(board, n, starts, rocks, lr, picked, cur + 1, m, ans)
     
     return ans
-    
+
 
 def main():
     n, k, m = map(int, input().split())
@@ -57,10 +65,8 @@ def main():
         r, c = map(int, input().split())
         starts[i] = [r - 1, c - 1]
     
-    if len(rocks) - m < n:
-        print(n ** 2 - len(rocks) + m)
-    else:
-        print(solution(board, n, starts, rocks, min(len(rocks), m), 0, 0))
+    ans = pick_rock(board, n, starts, rocks, len(rocks), [], 0, m, 0)
+    print(ans)
         
         
 if __name__ == "__main__":
