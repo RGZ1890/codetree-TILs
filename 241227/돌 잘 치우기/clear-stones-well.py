@@ -58,8 +58,8 @@ def solution(board, n, starts, m, rocks):
             avail.add((s[0], s[1]))
             avail = bfs(board, n, s, rock, avail)
         cnt = len(avail)
-#       if cnt == n ** 2 - lr + m:
-#           return cnt
+        if cnt == n ** 2 - lr + m:
+            return cnt
         ans = max(ans, cnt)
         
     return ans
