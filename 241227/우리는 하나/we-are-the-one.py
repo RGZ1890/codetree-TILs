@@ -9,18 +9,23 @@ def moveable(board, n, cur, nex, u, d):
     return False
 
 
-def bfs(board, n, visited, comb, u, d):
+def bfs(board, n, comb, u, d):
+    visited = [[False] * n for _ in range(n)]
     q = deque(comb)
     path = set()
     
+    for c in comb:
+        visited[c[0]][c[1]] = True
+        path.add((c[0], c[1]))
+    
     while q:
         cur = q.popleft()
-        path.add((cur[0], cur[1]))
-        visited[cur[0]][cur[1]] = True
         for di in dirs:
             nex = [cur[0] + di[0], cur[1] + di[1]]
             if moveable(board, n, cur, nex, u, d) \
             and not visited[nex[0]][nex[1]]:
+                path.add((nex[0], nex[1]))
+                visited[nex[0]][nex[1]] = True
                 q.append(nex)
 
     return path
@@ -49,8 +54,7 @@ def solution(board, n, k, u, d):
     
     ans = 0
     for comb in res:
-        visited = [[False] * n for _ in range(n)]
-        path = bfs(board, n, visited, comb, u, d)
+        path = bfs(board, n, comb, u, d)
         ans = max(ans, len(path))
         if ans == n ** 2:
             return ans
