@@ -11,18 +11,18 @@ def bfs(board, N, M, start, visited, res):
     
     while q:
         cur = q.popleft()
-        if is_outer and board[cur[0]][cur[1]] == 1:
-            res.add((cur[0], cur[1]))
         for d in dirs:
             nex = [cur[0] + d[0], cur[1] + d[1]]
             if 0 <= nex[0] < N and 0 <= nex[1] < M \
-            and not visited[nex[0]][nex[1]] \
-            and board[cur[0]][cur[1]] == 0:
+            and not visited[nex[0]][nex[1]]:
                 if not is_outer:
                     is_outer = cur[0] == 0 or cur[0] == N \
                             or cur[1] == 0 or cur[1] == M
-                visited[nex[0]][nex[1]] = True
-                q.append(nex)
+                elif board[nex[0]][nex[1]] == 1:
+                    res.add((nex[0], nex[1]))
+                if board[nex[0]][nex[1]] == 0:
+                    visited[nex[0]][nex[1]] = True
+                    q.append(nex)
 
     return res
 
