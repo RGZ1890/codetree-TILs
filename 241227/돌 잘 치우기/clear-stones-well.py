@@ -33,9 +33,11 @@ def bfs(board, n, s, rock, avail):
 
 
 def pick_rock(picked, cur, m, lr, res):
-    if cur == lr:
-        if len(picked) == m:
-            return res + [picked]
+    if len(picked) > m:
+        return res
+    elif len(picked) == m:
+        return res + [picked]
+    elif cur == lr:
         return res
     
     res = pick_rock(picked + [cur], cur + 1, m, lr, res)
