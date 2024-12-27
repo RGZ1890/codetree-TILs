@@ -5,6 +5,7 @@ sys.setrecursionlimit(8 ** 8)
 
 dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
+
 def bfs(board, n, s, rock, avail):
     for r in rock:
         board[r[0]][r[1]] = 0
@@ -31,22 +32,34 @@ def bfs(board, n, s, rock, avail):
     return avail
 
 
-def pick_rock(board, n, starts, rocks, lr, picked, cur, m, ans):
+def pick_rock(picked, cur, m, lr, res):
     if cur == lr:
         if len(picked) == m:
-#           print("PICKED", picked)
-            rock = [rocks[p] for p in picked]
-            avail = set()
-            for s in starts:
-                avail.add((s[0], s[1]))
-                avail = bfs(board, n, s, rock, avail)
-                
-            return max(ans, len(avail))
-        return ans
+            return res + [picked]
+        return res
     
-    ans = pick_rock(board, n, starts, rocks, lr, picked + [cur], cur + 1, m, ans)
-    ans = pick_rock(board, n, starts, rocks, lr, picked, cur + 1, m, ans)
+    res = pick_rock(picked + [cur], cur + 1, m, lr, res)
+    res = pick_rock(picked, cur + 1, m, lr, res)
     
+    return res
+
+
+def solution(board, n, starts, m, rocks):
+    ans = 0
+    lr = len(rocks)
+    res = pick_rock([], 0, m, lr, [])
+#   print("RES", res)
+    for pick in res:
+        rock = [rocks[p] for p in pick]
+        avail = set()
+        for s in starts:
+            avail.add((s[0], s[1]))
+            avail = bfs(board, n, s, rock, avail)
+        cnt = len(avail)
+        if cnt == n ** 2 - lr + m:
+            return cnt
+        ans = max(ans, cnt)
+        
     return ans
 
 
@@ -65,9 +78,8 @@ def main():
         r, c = map(int, input().split())
         starts[i] = [r - 1, c - 1]
     
-    ans = pick_rock(board, n, starts, rocks, len(rocks), [], 0, m, 0)
-    print(ans)
-        
+    print(solution(board, n, starts, m, rocks))
+    
         
 if __name__ == "__main__":
     main()
