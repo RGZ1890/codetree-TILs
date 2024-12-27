@@ -3,10 +3,10 @@ from collections import deque
 dirs = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
 def bfs(board, n, m):
-    visited = [[False] * (m + 2) for _ in range(n + 2)]
+#   visited = [[False] * (m + 2) for _ in range(n + 2)]
     step = [[n * m] * (m + 2) for _ in range(n + 2)]
     step[1][1] = 0
-    visited[1][1] = True
+#   visited[1][1] = True
     q = deque()
     q.append([1, 1])
     
@@ -17,9 +17,7 @@ def bfs(board, n, m):
         
         for d in dirs:
             nex = [cur[0] + d[0], cur[1] + d[1]]
-            if board[nex[0]][nex[1]] == 1 \
-            and not visited[nex[0]][nex[1]]:
-                visited[nex[0]][nex[1]] == True
+            if board[nex[0]][nex[1]] == 1:
                 step[nex[0]][nex[1]] = min(step[cur[0]][cur[1]] + 1, step[nex[0]][nex[1]])
                 q.append(nex)
     
