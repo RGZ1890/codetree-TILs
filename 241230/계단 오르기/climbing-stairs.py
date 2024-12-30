@@ -6,7 +6,7 @@ stairs[1], stairs[2], stairs[3] = 0, 1, 1
 def DP(N):
     if stairs[N] != -1:
         return stairs[N]
-    stairs[N] = DP(N - 2) + DP(N - 3)
+    stairs[N] = (DP(N - 2) + DP(N - 3)) % 10007
     return stairs[N]
     
     
