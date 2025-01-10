@@ -1,4 +1,4 @@
-NOPE = 1000001
+NOPE = 0
 
 def solution(board, N):
 	ans_board = [[NOPE] * (N + 2) for _ in range(N + 2)]
@@ -11,6 +11,9 @@ def solution(board, N):
 				continue
 			ans_board[i][j] = min(ans_board[i][j],
 				max(ans_board[i - 1][j], ans_board[i][j - 1]))
+			
+	for row in ans_board:
+		print(row)
 			
 	
 	return ans_board[N][N]
