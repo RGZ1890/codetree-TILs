@@ -1,4 +1,8 @@
-NOPE = 0
+NOPE = 1000001
+
+def getVal(ans_board, cur, cand):
+	return min(ans_board[cur[0]][cur[1]], ans_board[cand[0]][cand[1]])
+
 
 def solution(board, N):
 	ans_board = [[NOPE] * (N + 2) for _ in range(N + 2)]
@@ -9,12 +13,8 @@ def solution(board, N):
 		for j in range(1, N + 1):
 			if [i, j] == [1, 1]:
 				continue
-			ans_board[i][j] = min(ans_board[i][j],
-				max(ans_board[i - 1][j], ans_board[i][j - 1]))
-			
-	for row in ans_board:
-		print(row)
-			
+			cur, left, upper = [i, j], [i - 1, j], [i, j - 1]
+			ans_board[i][j] = max(getVal(ans_board, cur, upper), getVal(ans_board, cur, left))
 	
 	return ans_board[N][N]
 
