@@ -1,4 +1,6 @@
-NOPE = 1000001
+import sys
+
+NOPE = sys.maxsize
 
 
 def solution(board, N):
