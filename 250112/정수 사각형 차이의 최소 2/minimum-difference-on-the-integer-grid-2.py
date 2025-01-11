@@ -1,5 +1,3 @@
-NOPE = 101
-
 def update(val, left, upper):
 	n_left = [min(val, left[0]), max(val, left[1])]
 	n_upper = [min(val, upper[0]), max(val, upper[1])]
@@ -15,10 +13,10 @@ def solution(board, n):
 				aboard[i][j] = [board[i - 1][j - 1], board[i - 1][j - 1]]
 				continue
 			aboard[i][j] = update(board[i - 1][j - 1], aboard[i][j - 1], aboard[i - 1][j])
-			
+
 #	for row in aboard:
 #		print(row)
-#	
+
 	return aboard[n][n][1] - aboard[n][n][0]
 
 
