@@ -1,4 +1,4 @@
-NOPE = 1000001
+NOPE = 0
 
 
 def solution(board, N):
@@ -11,6 +11,9 @@ def solution(board, N):
 			if [i, j] == [1, 1]:
 				continue
 			sboard[i][j] = min(sboard[i][j], max(sboard[i - 1][j], sboard[i][j - 1]))
+	
+#	for row in sboard:
+#		print(row)
 		
 	return sboard[N][N]
 	
