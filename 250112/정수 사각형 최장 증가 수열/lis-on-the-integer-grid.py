@@ -8,26 +8,19 @@ def moveable(board, n, cur, nex):
 def travel(aboard, board, n, cur):
 	if aboard[cur[0]][cur[1]] != 0:
 		return aboard[cur[0]][cur[1]]
+	cnt = 1
 	for d in dirs:
 		nex = [cur[0] + d[0], cur[1] + d[1]]
 		if moveable(board, n, cur, nex):
-			aboard[cur[0]][cur[1]] = max(aboard[cur[0]][cur[1]], \
-				travel(aboard, board, n, nex) + 1)
+			cnt = max(cnt, travel(aboard, board, n, nex) + 1)
+	aboard[cur[0]][cur[1]] = cnt
+	
 	return aboard[cur[0]][cur[1]]
 		
 
 def solution(board, n):
 	aboard = [[0] * (n + 2) for _ in range(n + 2)]
-	for i in range(1, n + 1):
-		for j in range(1, n + 1):
-			cur = [i, j]
-			cnt = 0
-			for d in dirs:
-				nex = [cur[0] + d[0], cur[1] + d[1]]
-				if moveable(board, n, cur, nex):
-					cnt += 1
-			aboard[cur[0]][cur[1]] = 1 if cnt == 0 else 0
-		
+	
 	ans = 0
 	for i in range(1, n + 1):
 		for j in range(1, n + 1):
