@@ -2,7 +2,12 @@ def update(val, left, upper):
 	n_left = [min(val, left[0]), max(val, left[1])]
 	n_upper = [min(val, upper[0]), max(val, upper[1])]
 	
-	return n_left if (n_left[1] - n_left[0]) <= (n_upper[1] - n_upper[0]) else n_upper
+	if (n_left[1] - n_left[0]) <= (n_upper[1] - n_upper[0]):
+		if n_left[1] - n_left[0] == n_upper[1] - n_upper[0] \
+		and left[1] - left[0] > upper[1] - upper[0]:
+			return n_upper
+		return n_left
+	return n_upper
 
 
 def solution(board, n):
